@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+      xmlns:pro="http://www.liquibase.org/xml/ns/pro" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+      <changeSet id="create_agencies_table" author="erfero">
+            <createTable tableName="agencies">
+                  <!-- Colonne ID -->
+                  <column name="id" type="BIGINT" autoIncrement="true">
+                        <constraints primaryKey="true" nullable="false"/>
+                  </column>
+
+                  <!-- Colonne Name -->
+                  <column name="name" type="varchar(255)">
+                        <constraints nullable="false"/>
+                  </column>
+
+                  <!-- Colonne manager_id -->
+                  <column name="manager_id" type="bigint"/>
+            </createTable>
+
+            <!-- Separate changeset for addForeignKeyConstraint -->
+            <addForeignKeyConstraint constraintName="fk_manager_id_users" baseTableName="agencies" baseColumnNames="manager_id" referencedTableName="users" referencedColumnNames="id" onDelete="CASCADE"/>
+      </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+      xmlns:pro="http://www.liquibase.org/xml/ns/pro" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+      <changeSet id="create_user_role_table" author="erfero">
+            <createTable tableName="user_role">
+                  <!-- Colonne ID -->
+                  <column name="id" type="bigint" autoIncrement="true">
+                        <constraints primaryKey="true" nullable="false"/>
+                  </column>
+
+                  <!-- Colonne role -->
+                  <column name="role" type="varchar(255)">
+                        <constraints nullable="false"/>
+                  </column>
+            </createTable>
+      </changeSet>
+
+      <!-- Ajout des valeurs pour l'énumération UserRole -->
+      <changeSet id="add_user_role_values" author="regisatl">
+            <sql>INSERT INTO user_role (role) VALUES ('AGENT')</sql>
+            <sql>INSERT INTO user_role (role) VALUES ('EXPERT')</sql>
+            <sql>INSERT INTO user_role (role) VALUES ('CLIENT')</sql>
+      </changeSet>
+
+</databaseChangeLog>

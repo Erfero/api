@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+      xmlns:pro="http://www.liquibase.org/xml/ns/pro" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+      <changeSet id="create_interventions_table" author="erfero">
+            <createTable tableName="interventions">
+                  <!-- Colonne ID -->
+                  <column name="id" type="bigint" autoIncrement="true">
+                        <constraints primaryKey="true" nullable="false"/>
+                  </column>
+
+                  <!-- Colonne Name -->
+                  <column name="name" type="varchar(255)">
+                        <constraints nullable="false"/>
+                  </column>
+
+                  <!-- Colonne status -->
+                  <column name="status" type="varchar(255)">
+                        <constraints nullable="false"/>
+                  </column>
+
+                  <!-- Colonne order_id -->
+                  <column name="order_id" type="bigint"/>
+
+                  <!-- Colonne total -->
+                  <column name="total" type="double"/>
+
+                  <!-- Colonne expert_id -->
+                  <column name="expert_id" type="bigint"/>
+
+                  <!-- Colonne created -->
+                  <column name="created" type="timestamp"/>
+            </createTable>
+            
+            <!-- Contrainte de clé étrangère pour order_id faisant référence à la table 'orders' -->
+            <addForeignKeyConstraint baseTableName="interventions" baseColumnNames="order_id" referencedTableName="orders" referencedColumnNames="id" constraintName="fk_order_id_orders" onDelete="CASCADE"/>
+
+            <!-- Contrainte de clé étrangère pour expert_id faisant référence à la table 'users' -->
+            <addForeignKeyConstraint baseTableName="interventions" baseColumnNames="expert_id" referencedTableName="users" referencedColumnNames="id" constraintName="fk_expert_id_users" onDelete="CASCADE"/>
+      </changeSet>
+
+</databaseChangeLog>
